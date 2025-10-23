@@ -14,6 +14,7 @@ export interface GameState {
   players: number;
   currentPlayer: number;
   impostor: number;
+  enabledHint: boolean;
   selectedWord: string;
   selectedHint: string;
   categoryName: string;

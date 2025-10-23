@@ -2,7 +2,8 @@ import { Category, GameState, WordHintPair } from "@/types/game";
 
 export const initializeGame = (
   playerCount: number,
-  enabledCategories: Category[]
+  enabledCategories: Category[],
+  enableHint: boolean
 ): GameState | null => {
   if (enabledCategories.length === 0) return null;
 
@@ -30,6 +31,7 @@ export const initializeGame = (
     currentPlayer: 0,
     impostor: impostorIndex,
     selectedWord: randomPair.word,
+    enabledHint: enableHint,
     selectedHint: randomHint,
     categoryName: randomCategory.name,
   };

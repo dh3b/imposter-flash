@@ -23,7 +23,9 @@ export default function Game() {
   if (!gameState) return null;
 
   const isImpostor = currentPlayer === gameState.impostor;
-  const displayText = isImpostor ? gameState.selectedHint : gameState.selectedWord;
+  const displayText: string = isImpostor
+  ? (gameState.enabledHint ? (gameState.selectedHint ?? "❌") : "❌")
+  : (gameState.selectedWord ?? "");
 
   const handleTouchStart = () => {
     setTouchStartTime(Date.now());

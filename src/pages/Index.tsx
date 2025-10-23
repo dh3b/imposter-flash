@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Switch } from "@/components/ui/switch";
 import { Plus } from "lucide-react";
 import { CategoryCard } from "@/components/CategoryCard";
 import { PlayerSelector } from "@/components/PlayerSelector";
@@ -18,6 +19,7 @@ export default function Index() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState<Category[]>([]);
   const [playerCount, setPlayerCount] = useState(3);
+  const [enableHint, setEnableHint] = useState(true);
 
   useEffect(() => {
     setCategories(loadCategories());
@@ -53,7 +55,7 @@ export default function Index() {
       return;
     }
 
-    const gameState = initializeGame(playerCount, enabledCategories);
+    const gameState = initializeGame(playerCount, enabledCategories, enableHint);
     if (!gameState) {
       toast.error("Failed to initialize game. Check your categories.");
       return;
@@ -98,6 +100,19 @@ export default function Index() {
               ))}
             </div>
           </ScrollArea>
+        </div>
+
+        {/* Enable Hint Section */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-center">Enable hint for Impostor</h2>
+          <div className="flex items-center justify-center space-x-4">
+            <Switch
+              checked={enableHint}
+              onCheckedChange={(val) => setEnableHint(Boolean(val))}
+              aria-label="Enable hint for impostor"
+            />
+            <span className="text-sm">{enableHint ? "Yes" : "No"}</span>
+          </div>
         </div>
 
         {/* Player Count Section */}
