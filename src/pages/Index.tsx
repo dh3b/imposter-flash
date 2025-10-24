@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
 import { Plus } from "lucide-react";
 import { CategoryCard } from "@/components/CategoryCard";
-import { PlayerSelector } from "@/components/PlayerSelector";
+import { CounterSelector } from "@/components/CounterSelector";
 import { Category } from "@/types/game";
 import {
   loadCategories,
@@ -19,6 +19,7 @@ export default function Index() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState<Category[]>([]);
   const [playerCount, setPlayerCount] = useState(3);
+  const [impostorCount, setImpostorCount] = useState(1);
   const [enableHint, setEnableHint] = useState(true);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function Index() {
       return;
     }
 
-    const gameState = initializeGame(playerCount, enabledCategories, enableHint);
+    const gameState = initializeGame(playerCount, impostorCount, enabledCategories, enableHint);
     if (!gameState) {
       toast.error("Failed to initialize game. Check your categories.");
       return;
@@ -115,10 +116,28 @@ export default function Index() {
           </div>
         </div>
 
+        {/* Impostor Count Section */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-center">Number of Impostors</h2>
+          <CounterSelector
+            count={impostorCount}
+            onChange={setImpostorCount}
+            min={1}
+            players={playerCount}
+            label="impostor"
+          />
+        </div>
+
         {/* Player Count Section */}
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-center">Number of Players</h2>
-          <PlayerSelector count={playerCount} onChange={setPlayerCount} />
+          <CounterSelector
+            count={playerCount}
+            onChange={setPlayerCount}
+            min={1}
+            max={25}
+            label="player"
+          />
         </div>
 
         {/* Play Button */}

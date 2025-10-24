@@ -13,7 +13,7 @@ export interface Category {
 export interface GameState {
   players: number;
   currentPlayer: number;
-  impostor: number;
+  impostorArr: Array<number>;
   enabledHint: boolean;
   selectedWord: string;
   selectedHint: string;

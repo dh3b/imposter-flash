@@ -22,7 +22,7 @@ export default function Game() {
 
   if (!gameState) return null;
 
-  const isImpostor = currentPlayer === gameState.impostor;
+  const isImpostor = gameState.impostorArr.includes(currentPlayer);
   const displayText: string = isImpostor
   ? (gameState.enabledHint ? (gameState.selectedHint ?? "❌") : "❌")
   : (gameState.selectedWord ?? "");
