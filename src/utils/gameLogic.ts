@@ -24,7 +24,7 @@ export const initializeGame = (
     ];
 
   // Select random impostor(s)
-  let n = impostorCount
+  let n = playerCount
   const arr = [...Array(n).keys()];
   while (n) {
     const i = Math.floor(Math.random() * n--);
